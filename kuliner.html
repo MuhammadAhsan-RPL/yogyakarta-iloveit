@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kuliner | Jogja Pusaka</title>
+    <meta name="description" content="Hidangan legendaris Yogyakarta beserta kampung asal dan ukuran rasanya." />
+    <meta name="theme-color" content="#2f5d3a" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Pasang tema sebelum halaman tampil supaya warnanya tidak berkedip -->
+    <script>
+      (function () {
+        var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        try {
+          theme = JSON.parse(localStorage.getItem("jp_theme")) || theme;
+        } catch (error) {}
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="lompat-ke-isi" href="#main">Langsung ke konten</a>
+    <div class="garis-gulir" id="scroll-progress"></div>
+
+    <header class="kepala-situs">
+      <div class="pembungkus-isi">
+        <a class="nama-situs" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 19C5 11 10 5 19 5C19 14 13 19 5 19Z" />
+            <path d="M5 19L13 11" />
+          </svg>
+          Jogja<span>.</span>Pusaka
+        </a>
+
+        <nav class="menu-situs" id="site-nav" aria-label="Menu utama">
+          <a href="index.html">Beranda</a>
+          <a href="sejarah.html">Sejarah</a>
+          <a href="budaya.html">Budaya</a>
+          <a href="kuliner.html" aria-current="page">Kuliner</a>
+          <a href="wisata.html">Wisata<span class="angka-menu" id="plan-badge" hidden>0</span></a>
+        </nav>
+
+        <div class="kendali-kepala">
+          <button class="tombol-tema" id="theme-toggle" type="button"
+            aria-label="Ganti tema siang atau malam">Malam</button>
+          <button class="tombol-menu" id="menu-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav">Menu</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="halaman">
+      <div class="pembungkus-isi">
+        <header class="kepala-halaman">
+          <div>
+            <h1>Dapur &amp; Rasa <em>Jogja</em></h1>
+            <p>
+              Delapan hidangan dari kepulan tungku kayu Wijilan hingga bara arang Stasiun Tugu,
+              lengkap dengan takaran rasa manis, gurih, dan pedasnya.
+            </p>
+          </div>
+        </header>
+
+        <section aria-label="Katalog kuliner">
+          <div class="bilah-perkakas">
+            <div class="saringan-topik" id="kuliner-filter" role="group" aria-label="Saring kategori kuliner"></div>
+            <input class="kolom-pencarian" type="search" id="kuliner-search"
+              placeholder="Cari gudeg, sate klatak, wedang..." aria-label="Cari hidangan" />
+          </div>
+          <div class="jajaran-catatan" id="kuliner-grid"></div>
+          <p class="pesan-tidak-ketemu" id="kuliner-empty" hidden>Tidak ada hidangan yang cocok dengan pencarianmu.</p>
+        </section>
+
+        <section aria-labelledby="taste-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="taste-title">Cocokkan dengan <em>seleramu</em></h2>
+            <p>Geser takaran manis, gurih, dan pedas yang kamu inginkan hari ini untuk melihat hidangan yang paling mendekati.</p>
+          </div>
+          <div class="pencari-selera muncul-saat-digulir">
+            <div class="kotak-isi">
+              <label class="pengatur-rasa">
+                Manis
+                <input type="range" id="taste-manis" min="0" max="5" value="3" />
+                <output id="taste-manis-value">3</output>
+              </label>
+              <label class="pengatur-rasa">
+                Gurih
+                <input type="range" id="taste-gurih" min="0" max="5" value="3" />
+                <output id="taste-gurih-value">3</output>
+              </label>
+              <label class="pengatur-rasa">
+                Pedas
+                <input type="range" id="taste-pedas" min="0" max="5" value="1" />
+                <output id="taste-pedas-value">1</output>
+              </label>
+            </div>
+
+            <div class="hasil-selera" aria-live="polite">
+              <span class="nilai-selera" id="taste-result-score"></span>
+              <h3 id="taste-result-name"></h3>
+              <p id="taste-result-summary"></p>
+              <button class="tombol tombol-terang" id="taste-result-detail" type="button">Buka cerita hidangan</button>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="angkringan-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="angkringan-title">Simulasi nampan <em>angkringan</em></h2>
+            <p>Pilih nasi kucing, sate bacem, gorengan hangat, dan minuman rempah ke atas nampan bambumu.</p>
+          </div>
+          <div class="meja-angkringan muncul-saat-digulir">
+            <div class="menu-angkringan" id="angkringan-menu" aria-label="Daftar menu angkringan"></div>
+            <div class="kotak-isi nampan-angkringan">
+              <h3>Nampan Bambumu</h3>
+              <p class="catatan-kecil" id="angkringan-note" aria-live="polite">Ketuk menu di samping untuk mulai mengambil lauk.</p>
+              <ul id="angkringan-tray"></ul>
+              <div class="total-jajanan">
+                <span>Perkiraan total</span>
+                <strong id="angkringan-total">Rp0</strong>
+              </div>
+              <button class="tombol tombol-garis" id="angkringan-clear" type="button" hidden>Kosongkan nampan</button>
+            </div>
+          </div>
+        </section>
+
+        <section aria-labelledby="random-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="random-title">Masih bingung mau <em>mencicipi apa</em>?</h2>
+          </div>
+          <div class="kotak-isi pengacak-selera muncul-saat-digulir">
+            <div class="nama-pilihan-acak" id="random-name" aria-live="polite">?</div>
+            <p id="random-info">Biarkan roda dapur kami memilihkan satu hidangan khas untukmu.</p>
+            <button class="tombol" id="random-roll" type="button">Putar pilihan kuliner</button>
+            <button class="tombol tombol-garis" id="random-detail" type="button" hidden>Baca selengkapnya</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Dialog detail, isinya diisi oleh common.js -->
+    <dialog class="jendela-cerita" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="sampul-jendela" id="detail-cover">
+        <button class="tutup-jendela" id="detail-close" type="button">Tutup</button>
+      </div>
+      <div class="isi-jendela">
+        <span class="label-kecil" id="detail-category"></span>
+        <h3 id="detail-title"></h3>
+        <p id="detail-description"></p>
+        <ul id="detail-facts"></ul>
+        <div class="daftar-label" id="detail-tags"></div>
+        <div class="ukuran-rasa" id="detail-taste"></div>
+        <p><strong id="detail-place-label"></strong> <span id="detail-place"></span></p>
+        <button class="tombol" id="detail-plan-button" type="button" hidden>Tambah ke rencana</button>
+      </div>
+    </dialog>
+
+    <div class="pita-bawah" aria-hidden="true"></div>
+
+    <footer class="kaki-situs">
+      <div class="pembungkus-isi">
+        <div class="susunan-bawah">
+          <div class="tentang-situs">
+            <h3>Jogja.Pusaka</h3>
+            <p>
+              Catatan ringkas tentang sejarah, budaya, kuliner, dan wisata di
+              Daerah Istimewa Yogyakarta.
+            </p>
+            <p class="kredit-foto-ringkas">Foto: Wikimedia Commons &amp; Pexels. <a href="images/README.txt">Cek kreditnya di sini</a>.</p>
+            <div class="akun-sosial">
+              <a href="#" data-soon aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.3" cy="6.7" r=".6" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="YouTube">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+                  <path d="M10 9.5L15 12L10 14.5Z" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="Email">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="3" />
+                  <path d="M4 7L12 13L20 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Jelajahi</h3>
+            <a href="index.html">Beranda</a>
+            <a href="sejarah.html">Sejarah</a>
+            <a href="budaya.html">Budaya</a>
+            <a href="kuliner.html">Kuliner</a>
+            <a href="wisata.html">Wisata</a>
+          </div>
+
+          <div>
+            <h3>Fitur</h3>
+            <a href="sejarah.html#timeline">Linimasa dan kuis</a>
+            <a href="budaya.html#studio-title">Studio batik dan saron</a>
+            <a href="kuliner.html#taste-title">Cari lewat rasa</a>
+            <a href="wisata.html#map-title">Peta dan rencana</a>
+          </div>
+
+          <div class="kontak-situs">
+            <h3>Hubungi kami</h3>
+            <ul class="daftar-kontak">
+              <li><strong>Lokasi</strong> Yogyakarta, DIY, Indonesia</li>
+              <li><strong>Email</strong> ILove@Yogyakarta.com</li>
+              <li><strong>Sumber</strong> “Foto: Wikimedia Commons & Pexels”</li>
+            </ul>
+            <form class="form-kabar" id="newsletter-form" novalidate>
+              <input type="email" id="newsletter-email" placeholder="Email kamu"
+                aria-label="Email untuk kabar terbaru" />
+              <button type="submit">Kabari saya</button>
+            </form>
+            <p class="pesan-kabar" id="newsletter-message" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="catatan-paling-bawah">
+          <span>© 2026BismillahJuaraTeam. Arsip sejarah, budaya, kuliner, dan wisata Yogyakarta.</span>
+          <button type="button" id="back-to-top">Kembali ke atas</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/kuliner.js"></script>
+  </body>
+</html>

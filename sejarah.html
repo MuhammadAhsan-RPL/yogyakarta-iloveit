@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sejarah | Jogja Pusaka</title>
+    <meta name="description" content="Linimasa sejarah Yogyakarta dari Mataram Kuno sampai Sumbu Filosofi." />
+    <meta name="theme-color" content="#2f5d3a" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Pasang tema sebelum halaman tampil supaya warnanya tidak berkedip -->
+    <script>
+      (function () {
+        var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        try {
+          theme = JSON.parse(localStorage.getItem("jp_theme")) || theme;
+        } catch (error) {}
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="lompat-ke-isi" href="#main">Langsung ke konten</a>
+    <div class="garis-gulir" id="scroll-progress"></div>
+
+    <header class="kepala-situs">
+      <div class="pembungkus-isi">
+        <a class="nama-situs" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 19C5 11 10 5 19 5C19 14 13 19 5 19Z" />
+            <path d="M5 19L13 11" />
+          </svg>
+          Jogja<span>.</span>Pusaka
+        </a>
+
+        <nav class="menu-situs" id="site-nav" aria-label="Menu utama">
+          <a href="index.html">Beranda</a>
+          <a href="sejarah.html" aria-current="page">Sejarah</a>
+          <a href="budaya.html">Budaya</a>
+          <a href="kuliner.html">Kuliner</a>
+          <a href="wisata.html">Wisata<span class="angka-menu" id="plan-badge" hidden>0</span></a>
+        </nav>
+
+        <div class="kendali-kepala">
+          <button class="tombol-tema" id="theme-toggle" type="button"
+            aria-label="Ganti tema siang atau malam">Malam</button>
+          <button class="tombol-menu" id="menu-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav">Menu</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="halaman">
+      <div class="pembungkus-isi">
+        <header class="kepala-halaman">
+          <div>
+            <h1>Jejak Sejarah <em>Yogyakarta</em></h1>
+            <p>
+              Sepuluh penanda waktu dari berdirinya candi-candi Mataram Kuno, pembukaan Hutan Beringan,
+              masa ibu kota perjuangan, hingga pengakuan Sumbu Filosofi oleh UNESCO.
+            </p>
+          </div>
+          <div class="lencana-tahun">
+            <strong id="years-since">0</strong>
+            <span>tahun sejak 1755</span>
+          </div>
+        </header>
+
+        <section aria-label="Linimasa">
+          <div class="bilah-perkakas">
+            <div class="saringan-topik" id="era-filter" role="group" aria-label="Saring menurut babak sejarah"></div>
+          </div>
+          <div class="linimasa" id="timeline">
+            <div class="garis-linimasa" id="timeline-progress"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="tugu-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="tugu-title">Dua wajah <em>Tugu</em></h2>
+            <p>Geser garis pembatas untuk membandingkan kisah Golong Gilig dan Tugu Pal Putih. Foto Golong Gilig adalah monumen pengingat masa kini, bukan foto asli tahun 1755; foto Pal Putih juga menampilkan wujudnya sekarang.</p>
+          </div>
+
+          <div class="banding-tugu muncul-saat-digulir">
+            <img class="foto-tugu-sekarang"
+              src="images/sejarah-tugu-kini-baru.webp"
+              alt="Tugu Pal Putih di tengah Kota Yogyakarta pada siang hari."
+              fetchpriority="high" />
+            <div class="rupa-tugu-dulu" id="compare-before">
+              <img class="foto-tugu-lama"
+                src="images/sejarah-golong-gilig-reka.webp"
+                alt="Monumen pengingat bentuk Tugu Golong Gilig di kawasan Tugu Yogyakarta."
+                fetchpriority="high" />
+            </div>
+            <div class="garis-pembatas" id="compare-divider"></div>
+            <span class="keterangan-banding keterangan-kiri">Golong Gilig</span>
+            <span class="keterangan-banding keterangan-kanan">Pal Putih, kini</span>
+            <input type="range" id="compare-slider" min="0" max="100" value="50"
+              aria-label="Geser untuk membandingkan dua bentuk Tugu" />
+          </div>
+
+          <div class="fakta-ringkas muncul-saat-digulir">
+            <div><small>Runtuh karena gempa</small><strong>10 Juni 1867</strong></div>
+            <div><small>Berdiri kembali</small><strong>3 Oktober 1889</strong></div>
+            <div><small>Perubahan tinggi</small><strong>±25 m → 15 m</strong></div>
+            <div><small>Perubahan wujud</small><strong>Silinder → Persegi</strong></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="axis-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="axis-title">Poros <em>Sumbu Filosofi</em></h2>
+            <p>Garis imajiner utara–selatan yang menata ruang kota sekaligus merangkum perjalanan hidup manusia Jawa. Ketuk tiap titiknya.</p>
+          </div>
+          <div class="susunan-poros muncul-saat-digulir">
+            <div class="poros-kota" id="axis"></div>
+            <div class="kotak-isi kisah-poros" id="axis-info" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section aria-labelledby="quiz-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="quiz-title">Uji ingatan <em>sejarahmu</em></h2>
+            <p>Empat pertanyaan singkat dari catatan linimasa dan Sumbu Filosofi di atas.</p>
+          </div>
+          <div class="kotak-isi kuis muncul-saat-digulir">
+            <div class="kemajuan-kuis"><span id="quiz-progress"></span></div>
+            <h3 id="quiz-question"></h3>
+            <div id="quiz-options"></div>
+            <p class="pesan-kuis" id="quiz-message" aria-live="polite"></p>
+            <button class="tombol" id="quiz-next" type="button" hidden>Soal berikutnya</button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Dialog detail, isinya diisi oleh common.js -->
+    <dialog class="jendela-cerita" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="sampul-jendela" id="detail-cover">
+        <button class="tutup-jendela" id="detail-close" type="button">Tutup</button>
+      </div>
+      <div class="isi-jendela">
+        <span class="label-kecil" id="detail-category"></span>
+        <h3 id="detail-title"></h3>
+        <p id="detail-description"></p>
+        <ul id="detail-facts"></ul>
+        <div class="daftar-label" id="detail-tags"></div>
+        <div class="ukuran-rasa" id="detail-taste"></div>
+        <p><strong id="detail-place-label"></strong> <span id="detail-place"></span></p>
+        <button class="tombol" id="detail-plan-button" type="button" hidden>Tambah ke rencana</button>
+      </div>
+    </dialog>
+
+    <div class="pita-bawah" aria-hidden="true"></div>
+
+    <footer class="kaki-situs">
+      <div class="pembungkus-isi">
+        <div class="susunan-bawah">
+          <div class="tentang-situs">
+            <h3>Jogja.Pusaka</h3>
+            <p>
+              Catatan ringkas tentang sejarah, budaya, kuliner, dan wisata di
+              Daerah Istimewa Yogyakarta.
+            </p>
+            <p class="kredit-foto-ringkas"><a href="images/README.txt">Sumber foto dan lisensi</a></p>
+            <div class="akun-sosial">
+              <a href="#" data-soon aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.3" cy="6.7" r=".6" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="YouTube">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+                  <path d="M10 9.5L15 12L10 14.5Z" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="Email">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="3" />
+                  <path d="M4 7L12 13L20 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Jelajahi</h3>
+            <a href="index.html">Beranda</a>
+            <a href="sejarah.html">Sejarah</a>
+            <a href="budaya.html">Budaya</a>
+            <a href="kuliner.html">Kuliner</a>
+            <a href="wisata.html">Wisata</a>
+          </div>
+
+          <div>
+            <h3>Fitur</h3>
+            <a href="sejarah.html#timeline">Linimasa dan kuis</a>
+            <a href="budaya.html#studio-title">Studio batik dan saron</a>
+            <a href="kuliner.html#taste-title">Cari lewat rasa</a>
+            <a href="wisata.html#map-title">Peta dan rencana</a>
+          </div>
+
+          <div class="kontak-situs">
+            <h3>Hubungi kami</h3>
+            <ul class="daftar-kontak">
+              <li><strong>Lokasi</strong> Yogyakarta, DIY, Indonesia</li>
+              <li><strong>Email</strong> ILove@Yogyakarta.com</li>
+              <li><strong>Sumber</strong> Keraton Yogyakarta, Dinas Kebudayaan DIY, UNESCO</li>
+            </ul>
+            <form class="form-kabar" id="newsletter-form" novalidate>
+              <input type="email" id="newsletter-email" placeholder="Email kamu"
+                aria-label="Email untuk kabar terbaru" />
+              <button type="submit">Kabari saya</button>
+            </form>
+            <p class="pesan-kabar" id="newsletter-message" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="catatan-paling-bawah">
+          <span>© 2026BismillahJuaraTeam. Arsip sejarah, budaya, kuliner, dan wisata Yogyakarta.</span>
+          <button type="button" id="back-to-top">Kembali ke atas</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/sejarah.js"></script>
+  </body>
+</html>

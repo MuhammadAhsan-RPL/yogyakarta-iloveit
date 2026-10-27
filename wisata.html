@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wisata | Jogja Pusaka</title>
+    <meta name="description" content="Tempat wisata budaya dan alam di Yogyakarta, lengkap dengan peta dan rencana." />
+    <meta name="theme-color" content="#2f5d3a" />
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Pasang tema sebelum halaman tampil supaya warnanya tidak berkedip -->
+    <script>
+      (function () {
+        var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        try {
+          theme = JSON.parse(localStorage.getItem("jp_theme")) || theme;
+        } catch (error) {}
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="lompat-ke-isi" href="#main">Langsung ke konten</a>
+    <div class="garis-gulir" id="scroll-progress"></div>
+
+    <header class="kepala-situs">
+      <div class="pembungkus-isi">
+        <a class="nama-situs" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 19C5 11 10 5 19 5C19 14 13 19 5 19Z" />
+            <path d="M5 19L13 11" />
+          </svg>
+          Jogja<span>.</span>Pusaka
+        </a>
+
+        <nav class="menu-situs" id="site-nav" aria-label="Menu utama">
+          <a href="index.html">Beranda</a>
+          <a href="sejarah.html">Sejarah</a>
+          <a href="budaya.html">Budaya</a>
+          <a href="kuliner.html">Kuliner</a>
+          <a href="wisata.html" aria-current="page">Wisata<span class="angka-menu" id="plan-badge" hidden>0</span></a>
+        </nav>
+
+        <div class="kendali-kepala">
+          <button class="tombol-tema" id="theme-toggle" type="button"
+            aria-label="Ganti tema siang atau malam">Malam</button>
+          <button class="tombol-menu" id="menu-toggle" type="button"
+            aria-expanded="false" aria-controls="site-nav">Menu</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main" class="halaman">
+      <div class="pembungkus-isi">
+        <header class="kepala-halaman">
+          <div>
+            <h1>Bentang Alam &amp; <em>Cagar Budaya</em></h1>
+            <p>
+              Sembilan titik persinggahan dari puncak batu purba Gunungkidul hingga kebun teh Menoreh.
+              Simpan tempat pilihanmu ke dalam daftar rencana perjalanan.
+            </p>
+          </div>
+        </header>
+
+        <section aria-label="Katalog wisata">
+          <div class="bilah-perkakas">
+            <div class="saringan-topik" id="wisata-filter" role="group" aria-label="Saring kategori wisata"></div>
+            <input class="kolom-pencarian" type="search" id="wisata-search"
+              placeholder="Cari candi, pantai, kampung..." aria-label="Cari tempat wisata" />
+          </div>
+          <div class="jajaran-catatan" id="wisata-grid"></div>
+          <p class="pesan-tidak-ketemu" id="wisata-empty" hidden>Tidak ditemukan lokasi wisata yang sesuai.</p>
+          <details class="kredit-foto" id="kredit-foto">
+            <summary>Status sumber dan lisensi foto</summary>
+            <p>Foto Wisata lama tidak diubah dalam pembaruan ini. Sumber dan lisensi foto pengganti di Beranda, Sejarah, Budaya, serta Kuliner dicatat di <a href="images/README.txt">daftar kredit foto</a>; status foto Wisata yang lama tetap perlu diperiksa satu per satu. Kredit Punakawan juga tersedia di <a href="budaya.html#punakawan-title">halaman Budaya</a>.</p>
+          </details>
+        </section>
+
+        <section aria-labelledby="map-title">
+          <div class="kepala-bagian muncul-saat-digulir">
+            <h2 id="map-title">Peta 5 wilayah <em>DIY</em></h2>
+            <p>Ketuk wilayah kabupaten atau kota pada peta untuk melihat karakter bentang alam dan daftar destinasinya.</p>
+          </div>
+          <div class="susunan-peta muncul-saat-digulir">
+            <div class="peta-diy">
+              <svg viewBox="0 0 400 290" id="map" role="group" aria-label="Peta skematis lima wilayah DIY">
+                <path data-region="kulon-progo" d="M20 110L110 70L130 140L120 235L40 255Z"
+                  fill="#dccb9f" tabindex="0" role="button" aria-label="Kulon Progo" />
+                <text x="44" y="172">Kulon Progo</text>
+
+                <path data-region="sleman" d="M130 60L220 22L305 55L282 112L190 118L138 128Z"
+                  fill="#b9cfa6" tabindex="0" role="button" aria-label="Sleman" />
+                <text x="180" y="84">Sleman</text>
+
+                <path data-region="bantul" d="M120 150L180 132L232 168L282 205L240 262L120 244Z"
+                  fill="#e8d59c" tabindex="0" role="button" aria-label="Bantul" />
+                <text x="150" y="212">Bantul</text>
+
+                <path data-region="gunungkidul" d="M242 120L352 134L372 232L292 272L258 214L238 168Z"
+                  fill="#c9d6b0" tabindex="0" role="button" aria-label="Gunungkidul" />
+                <text x="276" y="198">Gunungkidul</text>
+
+                <path data-region="kota" d="M180 124L228 126L228 164L182 162Z"
+                  fill="#e0a98a" tabindex="0" role="button" aria-label="Kota Yogyakarta" />
+                <text x="188" y="150">Kota</text>
+              </svg>
+            </div>
+            <div class="kotak-isi catatan-wilayah" id="map-info" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="kotak-isi rencana-jalan muncul-saat-digulir" aria-labelledby="plan-title">
+          <div class="kepala-rencana">
+            <h3 id="plan-title">Lembar Rencana Perjalanan <span class="label-kecil" id="plan-count">0 lokasi</span></h3>
+            <span class="label-kecil" id="stamp-counter">0 arsip telah kamu buka</span>
+          </div>
+          <ol id="plan-list"></ol>
+          <p class="catatan-kecil" id="plan-empty">
+            Rencanamu masih kosong. Buka salah satu kartu wisata di atas atau dari peta, lalu tekan tombol "+ Masukkan ke rencana kunjungan".
+          </p>
+          <button class="tombol tombol-garis" id="plan-copy" type="button" hidden>Salin rute perjalanan</button>
+          <span class="catatan-kecil" id="plan-message" aria-live="polite"></span>
+        </section>
+      </div>
+    </main>
+
+    <!-- Dialog detail, isinya diisi oleh common.js -->
+    <dialog class="jendela-cerita" id="detail-dialog" aria-labelledby="detail-title">
+      <div class="sampul-jendela" id="detail-cover">
+        <button class="tutup-jendela" id="detail-close" type="button">Tutup</button>
+      </div>
+      <div class="isi-jendela">
+        <span class="label-kecil" id="detail-category"></span>
+        <h3 id="detail-title"></h3>
+        <p id="detail-description"></p>
+        <ul id="detail-facts"></ul>
+        <div class="daftar-label" id="detail-tags"></div>
+        <div class="ukuran-rasa" id="detail-taste"></div>
+        <p><strong id="detail-place-label"></strong> <span id="detail-place"></span></p>
+        <button class="tombol" id="detail-plan-button" type="button" hidden>Tambah ke rencana</button>
+      </div>
+    </dialog>
+
+    <div class="pita-bawah" aria-hidden="true"></div>
+
+    <footer class="kaki-situs">
+      <div class="pembungkus-isi">
+        <div class="susunan-bawah">
+          <div class="tentang-situs">
+            <h3>Jogja.Pusaka</h3>
+            <p>
+              Catatan ringkas tentang sejarah, budaya, kuliner, dan wisata di
+              Daerah Istimewa Yogyakarta.
+            </p>
+            <div class="akun-sosial">
+              <a href="#" data-soon aria-label="Instagram">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.3" cy="6.7" r=".6" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="YouTube">
+                <svg viewBox="0 0 24 24">
+                  <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+                  <path d="M10 9.5L15 12L10 14.5Z" />
+                </svg>
+              </a>
+              <a href="#" data-soon aria-label="Email">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="3" />
+                  <path d="M4 7L12 13L20 7" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h3>Jelajahi</h3>
+            <a href="index.html">Beranda</a>
+            <a href="sejarah.html">Sejarah</a>
+            <a href="budaya.html">Budaya</a>
+            <a href="kuliner.html">Kuliner</a>
+            <a href="wisata.html">Wisata</a>
+          </div>
+
+          <div>
+            <h3>Fitur</h3>
+            <a href="sejarah.html#timeline">Linimasa dan kuis</a>
+            <a href="budaya.html#studio-title">Studio batik dan saron</a>
+            <a href="kuliner.html#taste-title">Cari lewat rasa</a>
+            <a href="wisata.html#map-title">Peta dan rencana</a>
+          </div>
+
+          <div class="kontak-situs">
+            <h3>Hubungi kami</h3>
+            <ul class="daftar-kontak">
+              <li><strong>Lokasi</strong> Yogyakarta, DIY, Indonesia</li>
+              <li><strong>Email</strong> ILove@Yogyakarta.com</li>
+              <li><strong>Sumber</strong> “Foto: Wikimedia Commons & Pexels”</li>
+            </ul>
+            <form class="form-kabar" id="newsletter-form" novalidate>
+              <input type="email" id="newsletter-email" placeholder="Email kamu"
+                aria-label="Email untuk kabar terbaru" />
+              <button type="submit">Kabari saya</button>
+            </form>
+            <p class="pesan-kabar" id="newsletter-message" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <div class="catatan-paling-bawah">
+          <span>© 2026BismillahJuaraTeam. Arsip sejarah, budaya, kuliner, dan wisata Yogyakarta.</span>
+          <button type="button" id="back-to-top">Kembali ke atas</button>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/wisata.js"></script>
+  </body>
+</html>
