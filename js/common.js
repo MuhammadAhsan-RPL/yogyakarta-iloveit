@@ -1,10 +1,9 @@
 // Fungsi bersama yang dipakai di lima halaman:
-// pengaturan tema, navigasi, render kartu katalog, jendela detail, dan stempel kunjungan.
+// navigasi, render kartu katalog, jendela detail, dan stempel kunjungan.
 
 const ambilId = (id) => document.getElementById(id);
 
 const KUNCI_SIMPAN = {
-  tema: "jp_theme",
   rencana: "jp_plan",
   stempel: "jp_stamps",
 };
@@ -33,29 +32,6 @@ function kurangiGerak() {
 
 function formatRupiah(angka) {
   return "Rp" + angka.toLocaleString("id-ID");
-}
-
-// Tema siang / malam
-const tombolTema = ambilId("theme-toggle");
-
-function terapkanTema(tema) {
-  const modeMalam = tema === "dark";
-  document.documentElement.dataset.theme = tema;
-  if (tombolTema) {
-    tombolTema.textContent = modeMalam ? "Mode Siang" : "Mode Malam";
-    tombolTema.setAttribute("aria-pressed", modeMalam);
-  }
-}
-
-terapkanTema(document.documentElement.dataset.theme || "light");
-
-if (tombolTema) {
-  tombolTema.addEventListener("click", () => {
-    const temaBerikutnya =
-      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
-    terapkanTema(temaBerikutnya);
-    tulisSimpanan(KUNCI_SIMPAN.tema, temaBerikutnya);
-  });
 }
 
 // Menu untuk tampilan ponsel

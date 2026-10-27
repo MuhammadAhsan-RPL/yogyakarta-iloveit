@@ -82,17 +82,7 @@ function pasangSuasanaHero() {
     });
   }
 
-  // Sesuaikan otomatis saat tombol Mode Malam di header ditekan
-  const tombolTemaAtas = ambilId("theme-toggle");
-  if (tombolTemaAtas) {
-    tombolTemaAtas.addEventListener("click", () => {
-      const sedangMalam = document.documentElement.dataset.theme === "dark";
-      ubahLangit(sedangMalam ? "malam" : "siang");
-    });
-  }
-
-  const temaAwalMalam = document.documentElement.dataset.theme === "dark";
-  ubahLangit(temaAwalMalam ? "malam" : "siang");
+  ubahLangit("siang");
 }
 
 // Empat pintu menuju halaman utama

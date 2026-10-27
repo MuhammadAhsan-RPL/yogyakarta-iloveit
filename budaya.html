@@ -16,16 +16,6 @@
     />
     <link rel="stylesheet" href="css/style.css" />
 
-    <!-- Pasang tema sebelum halaman tampil supaya warnanya tidak berkedip -->
-    <script>
-      (function () {
-        var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-        try {
-          theme = JSON.parse(localStorage.getItem("jp_theme")) || theme;
-        } catch (error) {}
-        document.documentElement.dataset.theme = theme;
-      })();
-    </script>
   </head>
   <body>
     <a class="lompat-ke-isi" href="#main">Langsung ke konten</a>
@@ -51,8 +41,6 @@
         </nav>
 
         <div class="kendali-kepala">
-          <button class="tombol-tema" id="theme-toggle" type="button"
-            aria-label="Ganti tema siang atau malam">Malam</button>
           <button class="tombol-menu" id="menu-toggle" type="button"
             aria-expanded="false" aria-controls="site-nav">Menu</button>
         </div>
@@ -226,7 +214,7 @@
         </div>
 
         <div class="catatan-paling-bawah">
-          <span>© 2026BismillahJuaraTeam. Arsip sejarah, budaya, kuliner, dan wisata Yogyakarta.</span>
+          <span>© Jogja Pusaka. All rights reserved. Arsip sejarah, budaya, kuliner, dan wisata Yogyakarta.</span>
           <button type="button" id="back-to-top">Kembali ke atas</button>
         </div>
       </div>
